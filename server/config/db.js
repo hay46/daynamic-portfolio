@@ -1,5 +1,5 @@
-const mysql = require('mysql2');
-const dotenv =require('dotenv');
+import mysql from "mysql2";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -16,6 +16,18 @@ db.connect((err)=>{
     }else{
         console.log('the database also connected');
     }
+});
+const table = `CREATE TABLE IF NOT EXISTS users (
+ id INT AUTO INCREMENT PRIMARY KEY,
+name VARCHAR(255) NOT NULL,
+email VARCHAR(255) NOT NULL UNIQUE,
+password VARCHAR(255) NOT NULL
+)`;
+db.query(table,(req,res)=>{
+    if(req){
+        console.log('the table is created');
+    }else{
+        console.log('the table is not created', res.message);
+    }
 })
-
-module.exports =db;
+export default db;
