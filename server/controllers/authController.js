@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import db from '../config/db.js'
 import { userFindbyEmail } from '../models/userModel.js';
 
-export const loginUser = async (req, res) => {
+export const loginAdmin = async (req, res) => {
     const { email, password } = req.body;
 
     userFindbyEmail(email, async (err, results) => {
@@ -35,7 +35,7 @@ export const loginUser = async (req, res) => {
          });
     });
 };
-export const registerUser = async (req, res) => {
+export const createAdmin = async (req, res) => {
  const [name,email, password] = req.body;
 
  // hashed password
