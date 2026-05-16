@@ -5,8 +5,8 @@ const router = express.Router();
 
 //create route
 
-router.post('./create-admin',createAdmin);
+router.post('/create-admin',createAdmin);
 
-router.post('./login',loginAdmin);
+router.post('/login',loginAdmin);
 
 export default router;

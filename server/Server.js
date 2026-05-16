@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.usse('/auth', authRouts);
+app.use('/auth', authRouts);
 
 app.get('/', (req,res)=>{
    res.send("responce backend reuuning");
