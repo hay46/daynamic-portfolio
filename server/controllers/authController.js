@@ -7,10 +7,11 @@ export const loginAdmin = async (req, res) => {
     const { email, password } = req.body;
 
     userFindbyEmail(email, async (err, results) => {
-        if (err) {
+        if (err) 
          return res.status(500).json({ message: 'Database error' });
-        }
-        const user = results[0];
+
+        if(results.length === 0) return res.status(401).json({mmessage:'invalid creadentials'});
+ const user = resault[0];
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
            return res.status(401).json({ message: 'Invalid credentials' });
@@ -31,29 +32,30 @@ export const loginAdmin = async (req, res) => {
                 id: user.id,
                 email:user.email,
                 name: user.name
-            }
+                 }
          });
     });
 };
 export const createAdmin = async (req, res) => {
- const {name,email, password} = req.body;
+  const { name, email, password } = req.body;  
+  if (!name || !email || !password) {
+    return res.status(400).json({ message: 'All fields are required' });
+  }
 
- // hashed password
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const sql = `INSERT INTO users (name, email, password) VALUES (?, ?, ?)`;
 
- const hashedPassword = await bcrypt.hash(password,10);
- const sql = `INSRE INTO users (name,email,password) VALUES (?, ?, ?)`
-
- db.query(sql,[name,email,hashedPassword],(err,resault)=>{
-
-    if(err){
-      return  res.status(400).json({
-            message: 'users already exists'
-        });
-    }else{
-       return res.status(200).json({
-            message: 'users created secssessfuly'
-        })  ;  
-    }
- })
-
- };
+    db.query(sql, [name, email, hashedPassword], (err, result) => {
+      if (err) {
+        if (err.code === 'ER_DUP_ENTRY') {
+          return res.status(409).json({ message: 'Email already exists' });
+        }
+        return res.status(500).json({ message: 'Database error' });
+      }
+      res.status(201).json({ message: 'User created successfully' });
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
