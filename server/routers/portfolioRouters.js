@@ -2,22 +2,22 @@ import {getAlldata,getById,addInformation,edit_portfolio,deletData} from '../con
 import express from 'express';
 import {verfidata} from '../middlewares/authMiddlewar.js';
 
-const router =express.Router;
+const Router =express.Router;
 
 //public user
 
-router.get("/",getAlldata);
+Router.get("/",getAlldata);
 
-router.get("/:id",getById);
+Router.get("/:id",getById);
 
 //admin user also view
 //addinformation router
-router.post("/",verfidata,addInformation);
+Router.post("/",verfidata,addInformation);
 //update information router
-router.put("/:id",verfidata,edit_portfolio,);
+Router.put("/:id",verfidata,edit_portfolio,);
 
 //delate user by id;
 
-router.delet("/:id",verfidata,deletData);
+Router.delet("/:id",verfidata,deletData);
 
 export default router;
