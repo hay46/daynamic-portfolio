@@ -11,4 +11,13 @@ router.get("/",getAlldata);
 router.get("/:id",getById);
 
 //admin user also view
+//addinformation router
+router.post("/",verfidata,addInformation);
+//update information router
+router.put("/:id",verfidata,edit_portfolio,);
 
+//delate user by id;
+
+router.delet("/:id",verfidata,deletData);
+
+export default router;
