@@ -4,9 +4,9 @@ import {get_all_retrive,add_portfolio,get_by_id,updatPortfolio,deletPortfolio} f
 export const getAlldata =((req,res)=>{
     get_all_retrive =((err,results)=>{
         if(err){
-       res.status(500).json({message:'database error',err});
+      return res.status(500).json({message:'database error',err});
           }else{
-            res.status(200).json(results)
+          return  res.status(200).json(results)
           }
     });
 });
@@ -15,14 +15,28 @@ export const getById = ((req,res)=>{
     const {id} = req.params;
     get_by_id(id,(err,results)=>{
         if(err){
-         res.status(500).json({message:"the database erro",err});
+        return res.status(500).json({message:"the database erro",err});
         }
         if(results.length ===0){
-            res.status(404).json({message: "not found"});
+          return  res.status(404).json({message: "not found"});
 
         }else{
-            res.status(200).json(results[0]);
+           return res.status(200).json(results[0]);
         }
        
     })
-})
+});
+
+export const addInformation = ((req,res)=>{
+    const {data} = req.body;
+    
+    add_portfolio(data,(err,results)=>{
+        if(err){
+         return res.status(500).json({message: "faild to created"});
+        }else{
+            res.status(201).json({message: "the data secssesfuly created"});
+        }
+       
+    });
+
+});
