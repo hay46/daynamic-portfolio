@@ -1,38 +1,73 @@
-import db from '../config/db.js'
+import db from '../config/db.js';
 
-export const add_portfolio = (data,callback)=>{
-    const sql = `INSERT INTO portfolio (image,discription,title,github_link,live_link) VALUES (?,?,?,?,?)`;
-    
-    db.query(sql,[data.image,data.discription,data.title,data.github_link,data.live_link],callback);
-};
+// Add new portfolio
+export const add_portfolio = (data, callback) => {
 
-export const get_all_retrive = (callback)=>{
-    const sql = `SELECT * FROM portfolio`;
-    db.query(sql,callback);
-};
+    if (!data) {
+        return callback(new Error('Data is undefined'));
+    }
 
-export const get_by_id = (id,callback)=>{
-    const sql = `SELECT * FROM portfolio WHERE id =?`;
-    db.query(sql,[id],callback);
+      const sql = `
+        INSERT INTO portfolio
+        (image, discription, title, github_link, live_link)
+        VALUES (?, ?, ?, ?, ?)
+    `;
 
-};
- export const updatPortfolio = (id,data,callback)=>{
-    const sql = `UPDATE * FROM portfolio AS image =?,discription =?,title =?,github_link =?,live_link =?, WHERE id =?`;
-    db.query(
+     db.query(
         sql,
         [
-        data.image,
-        data.discription,
-        data.title,
-        data.github_link,
-        data.live_link,
-        id
+            data.image,
+            data.discription,
+            data.title,
+            data.github_link,
+            data.live_link
         ],
         callback
     );
- }
+};
+// Get all portfolios
+export const get_all_retrive = (callback) => {
+    const sql = `SELECT * FROM portfolio`;
+    db.query(sql, callback);
+};
 
-export const deletPortfolio = (id, callback)=>{
-    const sql = `DELET FROM portfolio WHERE id = ?`;
-    db.query(sql,[id],callback);
-}
+// Get portfolio by ID
+export const get_by_id = (id, callback) => {
+    const sql = `SELECT * FROM portfolio WHERE id = ?`;
+    db.query(sql, [id], callback);
+};
+
+// Update portfolio
+export const updatPortfolio = (id, data, callback) => {
+    if (!data) {
+        return callback(new Error('Data is undefined'));
+    }
+
+    const sql = `
+        UPDATE portfolio
+        SET image = ?,
+            discription = ?,
+            title = ?,
+            github_link = ?,
+            live_link = ?
+        WHERE id = ?
+    `;
+
+    db.query(
+        sql,
+        [
+            data.image,
+            data.discription,
+            data.title,
+            data.github_link,
+            data.live_link,
+            id
+        ],
+        callback
+    );
+};
+// Delete portfolio
+export const deletPortfolio = (id, callback) => {
+    const sql = `DELETE FROM portfolio WHERE id = ?`;
+    db.query(sql, [id], callback);
+};

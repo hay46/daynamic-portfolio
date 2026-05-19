@@ -6,18 +6,18 @@ const router =express.Router();
 
 //public user
 
-router.get("/",getAlldata);
+router.get("/getall",getAlldata);
 
-router.get("/:id",getById);
+router.get("/getbyid/:id",getById);
 
 //admin user also view
 //addinformation router
-router.post("/",verfidata,addInformation);
+router.post("/addportfolio",verfidata,addInformation);
 //update information router
-router.put("/:id",verfidata,edit_portfolio,);
+router.put("/edit_portfolio/:id",verfidata,edit_portfolio,);
 
 //delate user by id;
 
-router.delete("/:id", verfidata, deletData);
+router.delete("/delete_portfolio/:id", verfidata, deletData);
 
 export default router;

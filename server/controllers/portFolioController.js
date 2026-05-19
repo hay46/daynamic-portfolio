@@ -1,8 +1,26 @@
 import {get_all_retrive,add_portfolio,get_by_id,updatPortfolio,deletPortfolio} from '../models/portfolioModel.js'
 
 
+export const addInformation = (req, res) => {
+    const data = req.body;
+
+    add_portfolio(data, (err, results) => {
+        if (err) {
+            return res.status(500).json({
+                message: "Failed to create",
+                error: err.message,   // Shows actual MySQL error
+                details: err
+            });
+        }
+
+        return res.status(201).json({
+            message: "The data was successfully created",
+            results
+        });
+    });
+};
 export const getAlldata =((req,res)=>{
-    get_all_retrive =((err,results)=>{
+    get_all_retrive((err,results)=>{
         if(err){
       return res.status(500).json({message:'database error',err});
           }else{
@@ -27,24 +45,11 @@ export const getById = ((req,res)=>{
     })
 });
 
-export const addInformation = ((req,res)=>{
-    const {data} = req.body;
-    
-    add_portfolio(data,(err,results)=>{
-        if(err){
-         return res.status(500).json({message: "faild to created"});
-        }else{
-            res.status(201).json({message: "the data secssesfuly created"});
-        }
-       
-    });
-
-});
 
 export const edit_portfolio = ((req,res)=>{
 
     const {id} = req.params;
-    const {data} = req.body;
+    const data = req.body;
     updatPortfolio(id,data,(err,results)=>{
      if(err){
         return res.status(500).json({message: "failed to update"});
@@ -61,7 +66,7 @@ export const deletData =((req,res)=>{
         if(err){
             return res.status(500).json({message:"faild to delted project",err});
         }
-        if(results.length === 0){
+        if(results.affectedRows  === 0){
             return res.status(404).json({message: "the project is not found"});
         }else{
             return res.status(200).json({message : "the delate also secessfuly"});
