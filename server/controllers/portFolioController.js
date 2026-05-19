@@ -40,3 +40,17 @@ export const addInformation = ((req,res)=>{
     });
 
 });
+
+export const edit_portfolio = ((req,res)=>{
+
+    const {id} = req.params;
+    const {data} = req.body;
+    updatPortfolio(id,data,(err,results)=>{
+     if(err){
+        return res.status(500).json({message: "the data do not update"});
+     }else{
+        return res.status(201).json({message:"the data also updated secesessfuly"})
+     }
+    });
+});
+
