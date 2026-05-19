@@ -54,3 +54,17 @@ export const edit_portfolio = ((req,res)=>{
     });
 });
 
+export const deletData =((req,res)=>{
+    const {id} = req.params;
+
+    deletPortfolio(id,(err,results)=>{
+        if(err){
+            return res.status(500).json({message:"database erro",err});
+        }
+        if(results.length === 0){
+            return res.status(404).json({message: "the project is not found"});
+        }else{
+            return res.status(200).json({message : "the delate also secessfuly"});
+        }
+    })
+})
