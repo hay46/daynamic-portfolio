@@ -47,7 +47,7 @@ export const edit_portfolio = ((req,res)=>{
     const {data} = req.body;
     updatPortfolio(id,data,(err,results)=>{
      if(err){
-        return res.status(500).json({message: "the data do not update"});
+        return res.status(500).json({message: "failed to update"});
      }else{
         return res.status(201).json({message:"the data also updated secesessfuly"})
      }
@@ -59,7 +59,7 @@ export const deletData =((req,res)=>{
 
     deletPortfolio(id,(err,results)=>{
         if(err){
-            return res.status(500).json({message:"database erro",err});
+            return res.status(500).json({message:"faild to delted project",err});
         }
         if(results.length === 0){
             return res.status(404).json({message: "the project is not found"});
