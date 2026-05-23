@@ -1,8 +1,11 @@
 import React from 'react'
 import './Portfolio.module.css'
+import HeroSection from '../../../components/common/hero/HeroSection'
 const Portfolio = () => {
   return (
-    <div>this the portfolio page</div>
+    <div>
+       <HeroSection />
+    </div>
   )
 }
 

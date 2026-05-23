@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';   // ✅ use NavLink instead of Link
 import styles from './Navbar.module.css';
-import logo from '../../../assets/images/group logo photo_2026-02-21_01-35-49.jpg';   
+import logo from '../../../assets/images/group logo photo_2026-02-21_01-35-49.jpg';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,16 +14,18 @@ const Navbar = () => {
     setIsMenuOpen(false);
   };
 
+  // Helper function to get active class
+  const getActiveClass = ({ isActive }) => isActive ? styles.active : '';
+
   return (
     <nav className={styles.navbar}>
       <div className={styles.logo}>
         <img src={logo} alt="portfolio logo" />
-        <Link to="/">VISION</Link>
+        <NavLink to="/">VISION</NavLink>
       </div>
 
-    
-      <div 
-        className={`${styles.hamburger} ${isMenuOpen ? styles.open : ''}`} 
+      <div
+        className={`${styles.hamburger} ${isMenuOpen ? styles.open : ''}`}
         onClick={toggleMenu}
       >
         <span></span>
@@ -31,14 +33,25 @@ const Navbar = () => {
         <span></span>
       </div>
 
-      {/* Navigation links - close menu when any link is clicked */}
       <ul className={`${styles.navLinks} ${isMenuOpen ? styles.active : ''}`}>
-        <li><Link to="/" onClick={closeMenu}>Home</Link></li>
-        <li><Link to="/about" onClick={closeMenu}>About</Link></li>
-        <li><Link to="/portfolio" onClick={closeMenu}>Portfolio</Link></li>
-        <li><Link to="/service" onClick={closeMenu}>Service</Link></li>
-        <li><Link to="/contact" onClick={closeMenu}>Contact</Link></li>
-        <li><Link to="/login" onClick={closeMenu}>Login</Link></li>
+        <li>
+          <NavLink to="/" className={getActiveClass} onClick={closeMenu}>Home</NavLink>
+        </li>
+        <li>
+          <NavLink to="/about" className={getActiveClass} onClick={closeMenu}>About</NavLink>
+        </li>
+        <li>
+          <NavLink to="/portfolio" className={getActiveClass} onClick={closeMenu}>Portfolio</NavLink>
+        </li>
+        <li>
+          <NavLink to="/service" className={getActiveClass} onClick={closeMenu}>Service</NavLink>
+        </li>
+        <li>
+          <NavLink to="/contact" className={getActiveClass} onClick={closeMenu}>Contact</NavLink>
+        </li>
+        <li>
+          <NavLink to="/login" className={getActiveClass} onClick={closeMenu}>Login</NavLink>
+        </li>
       </ul>
     </nav>
   );

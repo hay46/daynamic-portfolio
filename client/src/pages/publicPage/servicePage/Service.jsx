@@ -1,8 +1,11 @@
 import React from 'react'
 import './Service.module.css'
+import HeroSection from '../../../components/common/hero/HeroSection'
 const Service = () => {
   return (
-    <div>this is the service page </div>
+    <div>
+ <HeroSection />
+    </div>
   )
 }
 
