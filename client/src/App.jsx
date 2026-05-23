@@ -1,5 +1,5 @@
 // import React from 'react'
-
+import{brouterRouter,Routes,Route} from 'react-router-dom'
 const App = () => {
   return (
     <div>
@@ -8,4 +8,4 @@ const App = () => {
   )
 }
 
-export default App
+export default App;
