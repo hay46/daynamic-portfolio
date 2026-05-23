@@ -1,10 +1,16 @@
 // import React from 'react'
-import{brouterRouter,Routes,Route} from 'react-router-dom'
+import{BrowserRouter,Routes,Route} from 'react-router-dom'
+import PublicLayout from './components/Layouts/publicLayout/PublicLayout';
+import Home from './pages/publicPage/homePage/Home'
+
 const App = () => {
   return (
-    <div>
-      <h1>this is the app page</h1>
-    </div>
+   <BrowserRouter>
+   <Routes>
+     <Route path='' element={<PublicLayout/>}/>
+     <Route path='/' element={<Home/>}/>
+   </Routes>
+   </BrowserRouter>
   )
 }
 
