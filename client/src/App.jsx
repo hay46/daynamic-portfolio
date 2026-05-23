@@ -4,7 +4,9 @@ import Home from './pages/publicPage/homePage/Home';
 import About from './pages/publicPage/aboutPage/About';
 import Service from './pages/publicPage/servicePage/Service';
 import Portfolio from './pages/publicPage/portfolioPage/Portfolio';
-import Contact from './pages/publicPage/contactPage/Contact';   // ✅ ADD THIS
+import Contact from './pages/publicPage/contactPage/Contact';  
+import login from './pages/publicPage/loginPage/Login'
+import Login from './pages/publicPage/loginPage/Login';
 
 const App = () => {
   return (
@@ -15,7 +17,8 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/service" element={<Service />} />
           <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/contact" element={<Contact />} />   {/* Now Contact is defined */}
+          <Route path="/contact" element={<Contact />} />  
+           <Route path="/login" element={<Login />} />   
         </Route>
       </Routes>
     </BrowserRouter>

@@ -67,7 +67,7 @@ const Footer = () => {
 
      
       <div className={styles.copyright}>
-        <p>&copy; {currentYear} VISION. All rights reserved. | Designed with </p>
+        <p>&copy; {currentYear} VISION. All rights reserved. | Designed with VISION Tech</p>
       </div>
     </footer>
   );
