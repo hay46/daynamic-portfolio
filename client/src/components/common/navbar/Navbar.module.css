@@ -86,6 +86,16 @@
   color: #e94560;
 }
 
+/* ========== ACTIVE LINK STYLES (add this block) ========== */
+.navLinks li a.active {
+  color: #e94560;
+}
+
+.navLinks li a.active::after {
+  width: 100%;
+}
+/* ======================================================== */
+
 /* Hamburger icon (hidden on desktop) */
 .hamburger {
   display: none;
@@ -118,7 +128,7 @@
   transform: rotate(-45deg) translate(6px, -6px);
 }
 
-
+/* ========== Responsive (Tablets & Mobile) ========== */
 @media (max-width: 768px) {
   .navbar {
     padding: 0.8rem 1.5rem;
@@ -167,13 +177,12 @@
     bottom: -5px;
   }
 
- 
   body.menu-open {
     overflow: hidden;
   }
 }
 
-
+/* ========== Extra small devices (phones) ========== */
 @media (max-width: 480px) {
   .navbar {
     padding: 0.6rem 1rem;
@@ -196,7 +205,7 @@
   }
 }
 
-
+/* ========== Large screens (desktop) ========== */
 @media (min-width: 1440px) {
   .navbar {
     padding: 1rem 4rem;
