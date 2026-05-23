@@ -1,10 +1,8 @@
-import React from 'react'
-import './About.module.css'
-const About = () => {
+//import React from 'react'
+
+function About() {
   return (
-    <div>this is about page
-    
-    </div>
+    <div>About</div>
   )
 }
 

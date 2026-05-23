@@ -1,9 +1,12 @@
-import React from 'react'
-import './Contact.module.css'
+import React from 'react';
+import './Contact.css';
+
 const Contact = () => {
   return (
-    <div>thsi is the contact page</div>
-  )
-}
+    <div className="contact">
+      this is the contact page
+    </div>
+  );
+};
 
-export default Contact
+export default Contact;
