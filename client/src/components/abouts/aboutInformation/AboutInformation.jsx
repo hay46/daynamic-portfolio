@@ -2,7 +2,7 @@
 import './AboutInformation.module.css'
 const AboutInformation = () => {
   return (
-    <div>AboutInformation</div>
+    <div>this is the abpout page </div>
   )
 }
 
