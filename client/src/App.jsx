@@ -7,11 +7,13 @@ import Portfolio from './pages/publicPage/portfolioPage/Portfolio';
 import Contact from './pages/publicPage/contactPage/Contact';  
 import login from './pages/publicPage/loginPage/Login'
 import Login from './pages/publicPage/loginPage/Login';
-
+import DashbordLayout from './components/Layouts/dashboardLayout/DashbordLayout.jsx';
+import Dashboard from './pages/adminPage/dashboardPage/Dashboard.jsx'
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
+        {/* public layout */}
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -20,6 +22,10 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />  
            <Route path="/login" element={<Login />} />   
         </Route>
+        {/* admin routes */}
+         <Route path="/admin" element={<DashbordLayout />}>
+         <Route index element={<Dashboard/>}/>
+         </Route>
       </Routes>
     </BrowserRouter>
   );

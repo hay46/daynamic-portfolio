@@ -1,0 +1,17 @@
+.dashboard{
+display: flex;
+min-height: 100dvh;
+}
+.content{
+     flex:1;
+    background: #f3f3f3;
+}
+.main{
+    padding: 10px;
+
+}
+@media (max-width: 760px){
+    .dashboard{
+        flex-direction: column;
+    }
+}
