@@ -1,17 +1,87 @@
-.dashboard{
-display: flex;
-min-height: 100dvh;
-}
-.content{
-     flex:1;
-    background: #f3f3f3;
-}
-.main{
-    padding: 10px;
+/* DashbordLayout.module.css */
 
+/* Main dashboard container – using CSS Grid */
+.dashboard {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+  background: #f1f5f9;
+  transition: all 0.3s ease;
 }
-@media (max-width: 760px){
-    .dashboard{
-        flex-direction: column;
-    }
+
+/* Content area (right side) – flex column for topbar + main */
+.content {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 100vh;
+  scroll-behavior: smooth;
+}
+
+/* Topbar styling – fixed at top of content area */
+.content > :first-child {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Main content area – scrollable, with padding */
+.main {
+  flex: 1;
+  padding: 1.5rem 2rem;
+  background: #f8fafc;
+  overflow-y: auto;
+}
+
+/* Optional: add a subtle fade-in animation for content */
+.main > :global(.fade-enter) {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.main > :global(.fade-enter-active) {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Responsive design for tablets and mobiles */
+@media (max-width: 1024px) {
+  .dashboard {
+    grid-template-columns: 240px 1fr;
+  }
+  .main {
+    padding: 1rem 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+  /* Sidebar would be hidden or overlayed – adjust based on your Sidebar component's internal logic */
+  .content {
+    height: auto;
+    min-height: 100vh;
+  }
+  .main {
+    padding: 1rem;
+  }
+}
+
+/* Custom scrollbar for modern browsers */
+.main::-webkit-scrollbar {
+  width: 6px;
+}
+.main::-webkit-scrollbar-track {
+  background: #e2e8f0;
+  border-radius: 10px;
+}
+.main::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 10px;
+}
+.main::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
 }

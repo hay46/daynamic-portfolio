@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../../context/AuthContext'; 
-import './Login.module.css';
+import { useAuth } from '../../../context/AuthContext'; // ✅ fixed path & name
+import styles from './Login.module.css';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -20,7 +20,6 @@ const Login = () => {
       ...prev,
       [name]: value,
     }));
-    // Clear error when user starts typing
     if (error) setError('');
   };
 
@@ -32,8 +31,7 @@ const Login = () => {
     const result = await login(formData);
 
     if (result.success) {
-      // Redirect to dashboard or home page after login
-      navigate('/dashboard'); // change to your desired route
+      navigate('/admin');
     } else {
       setError(result.message || 'Login failed. Please try again.');
     }
@@ -41,13 +39,13 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <form onSubmit={handleSubmit} className="login-form">
-        <h2>Login to Your Portfolio Admin</h2>
+    <div className={styles.loginContainer}>
+      <form onSubmit={handleSubmit} className={styles.loginForm}>
+        <h1>Login</h1>
 
-        {error && <div className="error-message">{error}</div>}
+        {error && <div className={styles.errorMessage}>{error}</div>}
 
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -56,11 +54,11 @@ const Login = () => {
             value={formData.email}
             onChange={handleChange}
             required
-            placeholder="your@email.com"
+            placeholder="your email"
           />
         </div>
 
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label htmlFor="password">Password</label>
           <input
             type="password"
