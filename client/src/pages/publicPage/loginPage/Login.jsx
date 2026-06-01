@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../../context/AuthContext'; // ✅ fixed path & name
+import { useAuth } from '../../../../src/contaxt/AuthContaxt'; 
 import styles from './Login.module.css';
 
 const Login = () => {
