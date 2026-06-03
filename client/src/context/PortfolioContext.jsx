@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import api from '../service/api';
-import { useAuth } from './AuthContaxt'; 
+import { useAuth } from './AuthContext'; 
 
 
 const PortfolioContext = createContext();
@@ -24,7 +24,7 @@ export const PortfolioProvider = ({ children }) => {
   const fetchProjects = async () => {
     try {
       setLoading(true);
-      const response = await api.get('/portfolio');
+      const response = await api.get('/portfolio/getall');
       setProjects(response.data);
     } catch (error) {
       console.error('Error fetching projects:', error);
@@ -44,7 +44,7 @@ export const PortfolioProvider = ({ children }) => {
   const addProject = async (projectData) => {
     try {
       setLoading(true);
-      const response = await api.post('/portfolio', projectData, {
+      const response = await api.post('/portfolio/addportfolio', projectData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -67,7 +67,7 @@ export const PortfolioProvider = ({ children }) => {
   const deleteProject = async (id) => {
     try {
       setLoading(true);
-      await api.delete(`/portfolio/${id}`, {
+      await api.delete(`/portfolio/delete_portfolio/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

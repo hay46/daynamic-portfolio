@@ -1,7 +1,8 @@
+
 import { Navigate } from 'react'
-import { useAuth } from '../contaxt/AuthContaxt'
-const RoutesProtected = (children) => {
-    const { token,loading } = useAuth();
+import { useAuth } from '../context/AuthContext'
+const ProtecetdRoutes = (children) => {
+    const { token, loading } = useAuth();
     if(loading){
         return <h2>loading...</h2>;
 
@@ -11,5 +12,4 @@ const RoutesProtected = (children) => {
     return children;
 
 };
-
-export default RoutesProtected
+export default ProtecetdRoutes
