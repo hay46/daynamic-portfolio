@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import styles from './HeroSection.module.css';
+import styles from './Herosection.module.css';
+import heroImage from '../../../assets/images/portfolioHero.jpg';
 
 const HeroSection = () => {
   return (
@@ -9,10 +10,10 @@ const HeroSection = () => {
         <div className={styles.content}>
           <div className={styles.badge}>Welcome to VISION</div>
           <h1 className={styles.title}>
-           I am haymanot <span className={styles.gradient}>Digital Dreams</span>
+            I am Haymanot <span className={styles.gradient}>Digital Dreams</span>
           </h1>
           <p className={styles.subtitle}>
-            Transforming ideas into stunning digital experiences. 
+            Transforming ideas into stunning digital experiences.
             Let's create something amazing together.
           </p>
           <div className={styles.buttons}>
@@ -25,17 +26,23 @@ const HeroSection = () => {
           </div>
         </div>
         <div className={styles.imageWrapper}>
-          <div className={styles.imagePlaceholder}>
-          
-            <div className={styles.illustration}>
-              <div className={styles.shape1}></div>
-              <div className={styles.shape2}></div>
-              <div className={styles.shape3}></div>
-            </div>
+          <div className={styles.imageContainer}>
+            <div className={styles.imageGlow}></div>
+            <img 
+              src={heroImage} 
+              alt="Haymanot - Digital Creator" 
+              className={styles.heroImage}
+            />
+            <div className={styles.imageOverlay}></div>
+            <div className={styles.decorativeShape1}></div>
+            <div className={styles.decorativeShape2}></div>
           </div>
         </div>
       </div>
-    
+      <div className={styles.scrollIndicator}>
+        <span>Scroll</span>
+        <div className={styles.scrollArrow}></div>
+      </div>
     </section>
   );
 };

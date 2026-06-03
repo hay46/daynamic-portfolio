@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import api from '../service/api';
-import { useAuth } from './AuthContext'; 
+import { useAuth } from './AuthContaxt'; 
 
 
 const PortfolioContext = createContext();
