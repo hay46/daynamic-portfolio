@@ -11,11 +11,17 @@
 .title {
   text-align: center;
   font-size: 2.5rem;
-  margin-bottom: 3rem;
+  font-weight: 700;
   background: linear-gradient(135deg, #1e293b, #e94560);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+}
+
+.subtitle {
+  text-align: center;
+  color: #64748b;
+  margin-bottom: 3rem;
 }
 
 .grid {
@@ -56,4 +62,5 @@
 
 @media (max-width: 768px) {
   .title { font-size: 2rem; }
+  .grid { grid-template-columns: 1fr; }
 }

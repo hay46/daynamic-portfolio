@@ -1,0 +1,36 @@
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin: 2rem 0 3rem;
+}
+
+.btn {
+  padding: 0.6rem 1.5rem;
+  border: none;
+  background: #f1f5f9;
+  color: #1e293b;
+  border-radius: 40px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  background: #e2e8f0;
+  transform: translateY(-2px);
+}
+
+.active {
+  background: #e94560;
+  color: white;
+  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.3);
+}
+
+@media (max-width: 640px) {
+  .btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+  }
+}

@@ -1,13 +1,22 @@
-import React from 'react'
-import './Service.module.css'
-import HeroSection from '../../../components/common/hero/HeroSection'
-const Service = () => {
-  return (
-    <div>
-      <h1>service page</h1>
- <HeroSection />
-    </div>
-  )
-}
+import PageBanner from '../../../components/abouts/pageBanner/PageBanner';
+import ServicesGrid from '../../../components/services/servicesGrid/ServicesGrid';
+import ProcessSection from '../../../components/services/processSection/ProcessSection';
+import FaqSection from '../../../components/services/faqsection/FaqSection';
+import HeroSection from '../../../components/common/hero/HeroSection';
 
-export default Service
+const ServicesPage = () => {
+  return (
+    <>
+    <HeroSection/>
+      <PageBanner 
+        title="My Services" 
+        subtitle="What I can do for you"
+      />
+      <ServicesGrid />
+      <ProcessSection />
+      <FaqSection />
+    </>
+  );
+};
+
+export default ServicesPage;

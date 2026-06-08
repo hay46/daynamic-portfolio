@@ -2,7 +2,6 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import api from '../service/api';
 import { useAuth } from './AuthContext'; 
 
-
 const PortfolioContext = createContext();
 
 // Custom hook to use portfolio context

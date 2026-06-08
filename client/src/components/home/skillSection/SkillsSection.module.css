@@ -1,0 +1,50 @@
+.skills {
+  padding: 5rem 2rem;
+  background: #f8fafc;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  background: linear-gradient(135deg, #1e293b, #e94560);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.skillItem {
+  margin-bottom: 1.5rem;
+}
+
+.skillHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+  color: #0f172a;
+}
+
+.progressBar {
+  background: #e2e8f0;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  background: linear-gradient(90deg, #e94560, #ff6b6b);
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+@media (max-width: 768px) {
+  .title { font-size: 2rem; }
+}

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useAuth } from '../../../context/AuthContext';
 import { usePortfolio } from '../../../context/PortfolioContext';
 import { Link } from 'react-router-dom';
 import styles from './Dashboard.module.css';
@@ -10,7 +11,7 @@ const Dashboard = () => {
     fetchProjects();
   }, []);
 
-  // Calculate statistics
+ 
   const totalProjects = projects.length;
   const publishedProjects = projects.filter(p => p.status !== 'draft').length;
   const recentProjects = [...projects].slice(-3).reverse();
@@ -111,10 +112,10 @@ const Dashboard = () => {
             + Add Project
           </Link>
           <Link to="/admin/messages" className={styles.actionBtn}>
-            ✉️ View Messages
+             View Messages
           </Link>
           <Link to="/admin/profile" className={styles.actionBtn}>
-            👤 Edit Profile
+             Edit Profile
           </Link>
         </div>
       </div>
