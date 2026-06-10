@@ -9,7 +9,7 @@ import login from './pages/publicPage/loginPage/Login'
 import Login from './pages/publicPage/loginPage/Login';
 import DashbordLayout from './components/Layouts/dashboardLayout/DashbordLayout.jsx';
 import Dashboard from './pages/adminPage/dashboardPage/Dashboard.jsx'
-import ProtecetdRoutes from './routes/ProtecetdRoutes.jsx';
+import ProtectedRoutes from './routes/ProtectedRoutes.jsx';
 const App = () => {
   return (
     <BrowserRouter>
@@ -25,9 +25,9 @@ const App = () => {
         </Route>
         {/* admin routes */}
          <Route path="/admin" element={
-          <ProtecetdRoutes>
+          <ProtectedRoutes>
             <DashbordLayout />
-          </ProtecetdRoutes>
+          </ProtectedRoutes>
 
           }>
          <Route index element={<Dashboard/>}/>
