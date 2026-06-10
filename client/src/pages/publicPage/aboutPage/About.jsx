@@ -1,7 +1,7 @@
 import styles from './About.module.css'
 import { Link } from 'react-router-dom';
 import HeroSection from '../../../components/common/hero/HeroSection'
-import PagenBanner from '../../../components/abouts/pageBanner/PageBanner';
+import PageBanner from '../../../components/abouts/pageBanner/PageBanner';
 import AboutInfo from '../../../components/abouts/aboutInformation/AboutInfo';
 import Skills from '../../../components/abouts/skills/Skills';
 import Education from '../../../components/abouts/education/Education';
