@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../../context/AuthContext';
 import { usePortfolio } from '../../../context/PortfolioContext';
 import { Link } from 'react-router-dom';
-import CreatePortfolioModal from './CreatePortfolioModal';
+import CreatePortfolioModal from '.';
 import EditPortfolioModal from './EditPortfolioModal';
 import styles from './Dashboard.module.css';
 
