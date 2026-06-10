@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import api from '../service/api';
-import { useAuth } from './AuthContext'; 
+import { useAuth } from './AuthContext';
 
 const PortfolioContext = createContext();
 
@@ -19,7 +19,7 @@ export const PortfolioProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const { token } = useAuth();
 
-  // Fetch projects
+  // Fetch projects (public route – no token required)
   const fetchProjects = async () => {
     try {
       setLoading(true);
@@ -32,30 +32,79 @@ export const PortfolioProvider = ({ children }) => {
     }
   };
 
-  // Fetch projects when token exists (on mount and token changes)
+  // Fetch projects once on mount (no token needed – but you can keep the condition if you prefer)
   useEffect(() => {
-    if (token) {
-      fetchProjects();
-    }
-  }, [token]);
+    fetchProjects();
+  }, []); // removed token dependency because /getall is public
 
   // Add a new project
   const addProject = async (projectData) => {
     try {
       setLoading(true);
-      const response = await api.post('/portfolio/addportfolio', projectData, {
+      // Map frontend field 'description' to backend field 'discription'
+      const payload = {
+        title: projectData.title,
+        discription: projectData.description,    // note: backend uses 'discription'
+        image: projectData.image,
+        github_link: projectData.github_link,
+        live_link: projectData.live_link,
+      };
+      const response = await api.post('/portfolio/addportfolio', payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      // Update the local state with the new project
-      setProjects((prev) => [...prev, response.data]);
+      // The backend returns the new project (with id). Use it to update local state.
+      setProjects((prev) => [...prev, response.data.results || response.data]);
       return { success: true };
     } catch (error) {
       console.error('Error adding project:', error);
       return {
         success: false,
         message: error.response?.data?.message || 'Failed to add project',
+      };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Update an existing project
+  const updateProject = async (id, projectData) => {
+    try {
+      setLoading(true);
+      const payload = {
+        title: projectData.title,
+        discription: projectData.description,
+        image: projectData.image,
+        github_link: projectData.github_link,
+        live_link: projectData.live_link,
+      };
+      await api.put(`/portfolio/edit_portfolio/${id}`, payload, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // Update local state
+      setProjects((prev) =>
+        prev.map((p) =>
+          p.id === id
+            ? {
+                ...p,
+                title: projectData.title,
+                description: projectData.description,
+                image: projectData.image,
+                github_link: projectData.github_link,
+                live_link: projectData.live_link,
+              }
+            : p
+        )
+      );
+      return { success: true };
+    } catch (error) {
+      console.error('Error updating project:', error);
+      return {
+        success: false,
+        message: error.response?.data?.message || 'Failed to update project',
       };
     } finally {
       setLoading(false);
@@ -71,7 +120,6 @@ export const PortfolioProvider = ({ children }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      // Remove the deleted project from local state
       setProjects((prev) => prev.filter((project) => project.id !== id));
       return { success: true };
     } catch (error) {
@@ -85,12 +133,12 @@ export const PortfolioProvider = ({ children }) => {
     }
   };
 
-  // Value object to be provided to consumers
   const value = {
     projects,
     loading,
     fetchProjects,
     addProject,
+    updateProject,   // ✅ now available
     deleteProject,
   };
 
@@ -101,5 +149,4 @@ export const PortfolioProvider = ({ children }) => {
   );
 };
 
-// Default export
 export default PortfolioProvider;
