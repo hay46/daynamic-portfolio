@@ -5,7 +5,7 @@ import styles from './FeaturdPortfolio.module.css';
 
 const FeaturedPortfolio = () => {
   const { projects, loading } = usePortfolio();
-  const featured = projects.slice(0, 3); // show first 3 projects
+  const featured = projects.slice(0, 3); 
 
   if (loading) return <div className={styles.loading}>Loading projects...</div>;
   if (projects.length === 0) return null;

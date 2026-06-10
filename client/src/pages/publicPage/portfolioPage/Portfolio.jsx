@@ -10,7 +10,7 @@ const PortfolioPage = () => {
   const [activeCategory, setActiveCategory] = useState('All');
 
   useEffect(() => {
-    fetchProjects(); // if you have a context method
+    fetchProjects(); 
   }, []);
 
   useEffect(() => {

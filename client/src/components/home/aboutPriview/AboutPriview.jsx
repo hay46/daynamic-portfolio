@@ -17,13 +17,13 @@ const AboutPreview = () => {
         <div className={styles.content}>
           <h2 className={styles.title}>About Me</h2>
           <p className={styles.bio}>
-            I’m Haymanot, a passionate full‑stack developer with 5+ years of experience 
+            I’m Haymanot, a passionate software engineering and full‑stack web developer with 2+ years of experience 
             building modern web applications. I love turning complex problems into simple, 
             elegant designs.
           </p>
           <p className={styles.bio}>
-            When I’m not coding, you’ll find me exploring new tech, contributing to 
-            open source, or capturing moments through photography.
+            When I’m not coding, we’ll find me exploring new tech, contributing to 
+            open source and any real problem to solve in software
           </p>
           <div className={styles.skills}>
             <span>React</span>
@@ -32,7 +32,7 @@ const AboutPreview = () => {
             <span>MongoDB</span>
             <span>Tailwind</span>
           </div>
-          <Link to="/about" className={styles.btnAbout}>
+          <Link to="/About" className={styles.btnAbout}>
             More About Me →
           </Link>
         </div>

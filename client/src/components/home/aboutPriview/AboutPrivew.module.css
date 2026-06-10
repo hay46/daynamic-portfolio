@@ -22,9 +22,8 @@
 .profileImage {
   width: 280px;
   height: 280px;
-  object-fit: cover;
   border-radius: 50%;
-  border: 5px solid #e94560;
+  border: 0px solid #e94560;
   box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
   transition: transform 0.3s;
 }
