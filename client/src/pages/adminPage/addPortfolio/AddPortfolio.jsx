@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { usePortfolio } from '../../../context/PortfolioContext';
-import styles from './Modal.module.css';
+import styles from './CreatePortfolioModal.module.css';
 
 const CreatePortfolioModal = ({ onClose }) => {
   const { addProject } = usePortfolio();
@@ -10,7 +10,6 @@ const CreatePortfolioModal = ({ onClose }) => {
     image: '',
     github_link: '',
     live_link: '',
-    category: 'Web App'
   });
   const [submitting, setSubmitting] = useState(false);
 
@@ -31,23 +30,76 @@ const CreatePortfolioModal = ({ onClose }) => {
   };
 
   return (
-    <div className={styles.modalOverlay}>
+    <div className={styles.overlay}>
       <div className={styles.modal}>
+        <button className={styles.closeBtn} onClick={onClose}>×</button>
         <h2>Create Portfolio Project</h2>
         <form onSubmit={handleSubmit}>
-          <input name="title" placeholder="Title" value={formData.title} onChange={handleChange} required />
-          <textarea name="description" placeholder="Description" rows="3" value={formData.description} onChange={handleChange} required />
-          <input name="image" placeholder="Image URL" value={formData.image} onChange={handleChange} />
-          <input name="github_link" placeholder="GitHub Link" value={formData.github_link} onChange={handleChange} />
-          <input name="live_link" placeholder="Live Demo Link" value={formData.live_link} onChange={handleChange} />
-          <select name="category" value={formData.category} onChange={handleChange}>
-            <option>Web App</option>
-            <option>Mobile App</option>
-            <option>UI Design</option>
-          </select>
-          <div className={styles.modalActions}>
-            <button type="button" onClick={onClose}>Cancel</button>
-            <button type="submit" disabled={submitting}>Create</button>
+          <div className={styles.formGroup}>
+            <label>Title *</label>
+            <input
+              type="text"
+              name="title"
+              placeholder="e.g., E‑Commerce Platform"
+              value={formData.title}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label>Description *</label>
+            <textarea
+              name="description"
+              rows="4"
+              placeholder="Describe your project..."
+              value={formData.description}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label>Image URL</label>
+            <input
+              type="url"
+              name="image"
+              placeholder="https://example.com/image.jpg"
+              value={formData.image}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className={styles.row}>
+            <div className={styles.formGroup}>
+              <label>GitHub Link</label>
+              <input
+                type="url"
+                name="github_link"
+                placeholder="https://github.com/..."
+                value={formData.github_link}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Live Demo Link</label>
+              <input
+                type="url"
+                name="live_link"
+                placeholder="https://example.com"
+                value={formData.live_link}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div className={styles.actions}>
+            <button type="button" className={styles.cancelBtn} onClick={onClose}>
+              Cancel
+            </button>
+            <button type="submit" className={styles.submitBtn} disabled={submitting}>
+              {submitting ? 'Creating...' : 'Create Project'}
+            </button>
           </div>
         </form>
       </div>

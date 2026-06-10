@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { usePortfolio } from '../../../context/PortfolioContext';
-import styles from './Modal.module.css';
+import styles from './EditPortfolioModal.module.css';
 
 const EditPortfolioModal = ({ project, onClose }) => {
   const { updateProject } = usePortfolio();
   const [formData, setFormData] = useState({
-    title: project.title,
-    description: project.description,
+    title: project.title || '',
+    description: project.description || '',
     image: project.image || '',
     github_link: project.github_link || '',
     live_link: project.live_link || '',
-    category: project.category || 'Web App'
   });
   const [submitting, setSubmitting] = useState(false);
 
@@ -31,23 +30,72 @@ const EditPortfolioModal = ({ project, onClose }) => {
   };
 
   return (
-    <div className={styles.modalOverlay}>
+    <div className={styles.overlay}>
       <div className={styles.modal}>
+        <button className={styles.closeBtn} onClick={onClose}>×</button>
         <h2>Edit Portfolio Project</h2>
         <form onSubmit={handleSubmit}>
-          <input name="title" placeholder="Title" value={formData.title} onChange={handleChange} required />
-          <textarea name="description" placeholder="Description" rows="3" value={formData.description} onChange={handleChange} required />
-          <input name="image" placeholder="Image URL" value={formData.image} onChange={handleChange} />
-          <input name="github_link" placeholder="GitHub Link" value={formData.github_link} onChange={handleChange} />
-          <input name="live_link" placeholder="Live Demo Link" value={formData.live_link} onChange={handleChange} />
-          <select name="category" value={formData.category} onChange={handleChange}>
-            <option>Web App</option>
-            <option>Mobile App</option>
-            <option>UI Design</option>
-          </select>
-          <div className={styles.modalActions}>
-            <button type="button" onClick={onClose}>Cancel</button>
-            <button type="submit" disabled={submitting}>Update</button>
+          <div className={styles.formGroup}>
+            <label>Title *</label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label>Description *</label>
+            <textarea
+              name="description"
+              rows="4"
+              value={formData.description}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label>Image URL</label>
+            <input
+              type="url"
+              name="image"
+              value={formData.image}
+              onChange={handleChange}
+              placeholder="https://..."
+            />
+          </div>
+
+          <div className={styles.row}>
+            <div className={styles.formGroup}>
+              <label>GitHub Link</label>
+              <input
+                type="url"
+                name="github_link"
+                value={formData.github_link}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={styles.formGroup}>
+              <label>Live Demo Link</label>
+              <input
+                type="url"
+                name="live_link"
+                value={formData.live_link}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          <div className={styles.actions}>
+            <button type="button" className={styles.cancelBtn} onClick={onClose}>
+              Cancel
+            </button>
+            <button type="submit" className={styles.updateBtn} disabled={submitting}>
+              {submitting ? 'Updating...' : 'Update Project'}
+            </button>
           </div>
         </form>
       </div>
