@@ -8,7 +8,7 @@ const PublicLayout = () => {
     <div className={styles.layout}>              
       <Navbar />
       <main className={styles.main}>             
-        <Outlet />                               
+        <Outlet />                             
       </main>
       <Footer />
     </div>

@@ -138,7 +138,7 @@ export const PortfolioProvider = ({ children }) => {
     loading,
     fetchProjects,
     addProject,
-    updateProject,   // ✅ now available
+    updateProject,   
     deleteProject,
   };
 

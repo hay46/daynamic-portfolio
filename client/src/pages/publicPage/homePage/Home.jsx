@@ -5,12 +5,19 @@ import FeaturedPortfolio from '../../../components/home/featurdPortfolio/Feature
 import ServicesPreview from '../../../components/home/servicesPriview/Servicespreview';
 import SkillsSection from '../../../components/home/skillSection/SkillsSection';
 import CallToAction from '../../../components/home/colltoAction/CallToAction';
-
+import homeHeroImage from '../../../assets/images/portfolioHero.jpg'
 const Home = () => {
   return (
     <>
     
-      <HeroSection />
+       <HeroSection
+        badge="Welcome to My Portfolio"
+        title="I am Haymanot"
+        gradientText="Creative Developer"
+        subtitle="Building modern web applications with passion and precision. Let's bring your ideas to life."
+        imageSrc={homeHeroImage}
+        imageAlt="Haymanot - Home"
+      />
       <ServicesPreview/>
       <FeaturedPortfolio/>
        <AboutPreview/>

@@ -1,6 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';  // correct path and spelling
-
+import { useAuth } from '../context/AuthContext';  
 const ProtectedRoutes = ({ children }) => {
   const { token, loading } = useAuth();
 

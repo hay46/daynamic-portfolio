@@ -1,36 +1,46 @@
 import { Link } from 'react-router-dom';
 import styles from './Herosection.module.css';
-import heroImage from '../../../assets/images/portfolioHero.jpg';
 
-const HeroSection = () => {
+const HeroSection = ({
+  badge = "Welcome to VISION",
+  title = "I am Haymanot",
+  gradientText = "Digital Dreams",
+  subtitle = "Transforming ideas into stunning digital experiences. Let's create something amazing together.",
+  showButtons = true,
+  btnPrimaryText = "View Portfolio",
+  btnPrimaryLink = "/portfolio",
+  btnSecondaryText = "Get in Touch",
+  btnSecondaryLink = "/contact",
+  imageSrc,
+  imageAlt = "Hero Image",
+}) => {
   return (
     <section className={styles.hero}>
       <div className={styles.overlay}></div>
       <div className={styles.container}>
         <div className={styles.content}>
-          <div className={styles.badge}>Welcome to VISION</div>
+          <div className={styles.badge}>{badge}</div>
           <h1 className={styles.title}>
-            I am Haymanot <span className={styles.gradient}>Digital Dreams</span>
+            {title} <span className={styles.gradient}>{gradientText}</span>
           </h1>
-          <p className={styles.subtitle}>
-            Transforming ideas into stunning digital experiences.
-            Let's create something amazing together.
-          </p>
-          <div className={styles.buttons}>
-            <Link to="/portfolio" className={styles.btnPrimary}>
-              View Portfolio
-            </Link>
-            <Link to="/contact" className={styles.btnSecondary}>
-              Get in Touch
-            </Link>
-          </div>
+          <p className={styles.subtitle}>{subtitle}</p>
+          {showButtons && (
+            <div className={styles.buttons}>
+              <Link to={btnPrimaryLink} className={styles.btnPrimary}>
+                {btnPrimaryText}
+              </Link>
+              <Link to={btnSecondaryLink} className={styles.btnSecondary}>
+                {btnSecondaryText}
+              </Link>
+            </div>
+          )}
         </div>
         <div className={styles.imageWrapper}>
           <div className={styles.imageContainer}>
             <div className={styles.imageGlow}></div>
-            <img 
-              src={heroImage} 
-              alt="Haymanot - Digital Creator" 
+            <img
+              src={imageSrc}
+              alt={imageAlt}
               className={styles.heroImage}
             />
             <div className={styles.imageOverlay}></div>

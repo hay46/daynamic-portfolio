@@ -8,12 +8,20 @@ import Education from '../../../components/abouts/education/Education';
 import Experience from '../../../components/abouts/exprience/Exprience';
 import MissionVision from '../../../components/abouts/vision/MissionVision';
 import aboutphoto from '../../../assets/images/about-me.jpg'
-
+import aboutHeroImage from '../../../assets/images/about hero.png'
 
 const About = () => {
   return (
     <>
-    <HeroSection/>
+     <HeroSection
+        badge="Get to Know Me"
+        title="About"
+        gradientText="Haymanot"
+        subtitle="Full‑stack developer with 2+ years of experience. I love creating solutions that make a difference."
+        showButtons={false}  // no buttons on about page
+        imageSrc={aboutHeroImage}
+        imageAlt="About Haymanot"
+      />
       <PageBanner 
         title="About Me" 
         subtitle="Get to know the person behind the code" 
