@@ -3,3 +3,242 @@
   margin: 0 auto;
   padding: 2rem 2rem 5rem;
 }
+
+
+/* Herosection.module.css – Full‑width hero with image as background and text overlay */
+
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;           /* full viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: white;
+}
+
+/* Dark overlay for better text readability */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Container for content */
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+/* Left content area */
+.content {
+  flex: 1;
+  min-width: 280px;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(4px);
+  padding: 0.4rem 1rem;
+  border-radius: 40px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #e94560;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.gradient {
+  background: linear-gradient(135deg, #e94560, #ff6b6b);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 2rem;
+  max-width: 500px;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btnPrimary,
+.btnSecondary {
+  padding: 0.8rem 1.8rem;
+  border-radius: 40px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btnPrimary {
+  background: #e94560;
+  color: white;
+  box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+}
+
+.btnPrimary:hover {
+  background: #ff6b6b;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4);
+}
+
+.btnSecondary {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.btnSecondary:hover {
+  border-color: #e94560;
+  background: rgba(233, 69, 96, 0.2);
+  transform: translateY(-3px);
+}
+
+/* ===== FULL‑COVER IMAGE ===== */
+.imageWrapper {
+  flex: 1;
+  min-width: 280px;
+  position: relative;
+  z-index: 2;
+}
+
+/* The image container – covers the entire hero section */
+.imageContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* The actual image */
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* cover the whole hero area */
+  object-position: center;
+  display: block;
+}
+
+/* Remove the decorative shapes if they distract – but we keep them (they will be behind the overlay) */
+.imageGlow,
+.decorativeShape1,
+.decorativeShape2,
+.imageOverlay {
+  display: none;            /* disable extra decorations; they clutter the full‑image hero */
+}
+
+/* (Optional) If you want to keep glow and shapes, you can re‑enable them with lower opacity 
+   but for a clean full‑image hero, hiding them is better. */
+
+/* Scroll indicator */
+.scrollIndicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 0.8rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 3;
+}
+
+.scrollArrow {
+  width: 20px;
+  height: 20px;
+  border-right: 2px solid #e94560;
+  border-bottom: 2px solid #e94560;
+  transform: rotate(45deg);
+  animation: bounce 2s infinite;
+}
+
+/* Animations */
+@keyframes bounce {
+  0%, 100% { transform: rotate(45deg) translate(0, 0); opacity: 1; }
+  50% { transform: rotate(45deg) translate(5px, 5px); opacity: 0.5; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 90vh;
+    text-align: center;
+    padding: 6rem 1rem 4rem;
+  }
+  .container {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .title {
+    font-size: 2.5rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+  .buttons {
+    justify-content: center;
+  }
+  .imageWrapper {
+    display: none;  /* on mobile, hide the image wrapper because it's absolute covering */
+  }
+  /* The image is already covering the hero, so we don't need the wrapper */
+  .heroImage {
+    object-position: 30% center; /* adjust focus point if needed */
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem;
+  }
+  .btnPrimary, .btnSecondary {
+    padding: 0.6rem 1.4rem;
+    font-size: 0.9rem;
+  }
+}

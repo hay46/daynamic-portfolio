@@ -3,6 +3,8 @@ import PortfolioFilter from '../../../components/portfilo/portfolioFilter/Portfo
 import PortfolioGrid from '../../../components/portfilo/portfolioGrid/PortfolioGrid';
 import { usePortfolio } from '../../../context/PortfolioContext';
 import HeroSection from '../../../components/common/hero/HeroSection';
+import portfolioHeroImage from '../../../assets/images/portfolio-hero.png'
+import styles from './Portfolio.module.css'
 
 const PortfolioPage = () => {
   const { projects, loading, fetchProjects } = usePortfolio();
@@ -32,7 +34,18 @@ const PortfolioPage = () => {
   return (
 
     <div className="portfolio-page">
-      <HeroSection/>
+      <HeroSection
+        badge="My Work"
+        title="Explore My"
+        gradientText="Projects"
+        subtitle="A collection of my best work – from web apps to UI designs."
+        btnPrimaryText="View All Projects"
+        btnPrimaryLink="#projects"
+        btnSecondaryText="Hire Me"
+        btnSecondaryLink="/contact"
+        imageSrc={portfolioHeroImage}
+        imageAlt="Portfolio showcase"
+      />
       <PortfolioFilter
         activeCategory={activeCategory}
         onFilterChange={handleFilterChange}
