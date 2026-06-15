@@ -3,10 +3,10 @@ import styles from './Education.module.css';
 
 const educationData = [
   {
-    degree: 'B.Sc. in Computer Science',
-    institution: 'University of Technology',
+    degree: 'B.Sc. in software engineering',
+    institution: 'University of Technology in injibara unoversity',
     year: '2016 – 2020',
-    description: 'Graduated with honors, focused on web development and algorithms.',
+    description: 'Graduated with honors, focused on software engineener and web development and algorithms.',
   },
   {
     degree: 'Full Stack Web Development Bootcamp',

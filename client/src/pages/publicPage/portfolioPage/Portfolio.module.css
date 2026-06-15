@@ -5,12 +5,12 @@
 }
 
 
-/* Herosection.module.css – Full‑width hero with image as background and text overlay */
+/* Herosection.module.css – Full‑width hero with background image and text overlay */
 
 .hero {
   position: relative;
   width: 100%;
-  min-height: 100vh;           /* full viewport height */
+  min-height: 100vh;               /* full viewport height */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,7 +18,7 @@
   color: white;
 }
 
-/* Dark overlay for better text readability */
+/* Dark gradient overlay – improves text readability */
 .overlay {
   position: absolute;
   top: 0;
@@ -30,7 +30,7 @@
   pointer-events: none;
 }
 
-/* Container for content */
+/* Container for content – sits above the overlay */
 .container {
   position: relative;
   z-index: 2;
@@ -44,7 +44,7 @@
   flex-wrap: wrap;
 }
 
-/* Left content area */
+/* Left content */
 .content {
   flex: 1;
   min-width: 280px;
@@ -135,7 +135,7 @@
   z-index: 2;
 }
 
-/* The image container – covers the entire hero section */
+/* The image container – placed as absolute background behind everything */
 .imageContainer {
   position: absolute;
   top: 0;
@@ -146,25 +146,21 @@
   overflow: hidden;
 }
 
-/* The actual image */
 .heroImage {
   width: 100%;
   height: 100%;
-  object-fit: cover;        /* cover the whole hero area */
+  object-fit: cover;          /* covers the whole hero area */
   object-position: center;
   display: block;
 }
 
-/* Remove the decorative shapes if they distract – but we keep them (they will be behind the overlay) */
+/* Hide decorative shapes / glow – they clutter the full‑image hero */
 .imageGlow,
 .decorativeShape1,
 .decorativeShape2,
 .imageOverlay {
-  display: none;            /* disable extra decorations; they clutter the full‑image hero */
+  display: none;
 }
-
-/* (Optional) If you want to keep glow and shapes, you can re‑enable them with lower opacity 
-   but for a clean full‑image hero, hiding them is better. */
 
 /* Scroll indicator */
 .scrollIndicator {
@@ -191,13 +187,12 @@
   animation: bounce 2s infinite;
 }
 
-/* Animations */
 @keyframes bounce {
   0%, 100% { transform: rotate(45deg) translate(0, 0); opacity: 1; }
   50% { transform: rotate(45deg) translate(5px, 5px); opacity: 0.5; }
 }
 
-/* Responsive adjustments */
+/* Responsive design */
 @media (max-width: 768px) {
   .hero {
     min-height: 90vh;
@@ -225,11 +220,12 @@
     justify-content: center;
   }
   .imageWrapper {
-    display: none;  /* on mobile, hide the image wrapper because it's absolute covering */
+    /* On mobile, the image is already covering the background */
+    display: none;
   }
-  /* The image is already covering the hero, so we don't need the wrapper */
+  /* Ensure the image still covers the whole hero */
   .heroImage {
-    object-position: 30% center; /* adjust focus point if needed */
+    object-position: 30% center;
   }
 }
 
