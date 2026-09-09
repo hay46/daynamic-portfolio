@@ -2,7 +2,7 @@
   background: white;
   border-radius: 1rem;
   padding: 1.5rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.05);
 }
 
 .form h3 {
@@ -40,7 +40,7 @@
   background: #e94560;
   color: white;
   border: none;
-  padding: 0.8rem 1.5rem;
+  padding: 0.8rem 1.6rem;
   border-radius: 2rem;
   font-weight: 600;
   cursor: pointer;
