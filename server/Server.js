@@ -19,7 +19,7 @@ app.get("/api/health", (req, res) => {
     if (err) return res.status(500).json({ db: "down", error: err.message });
     res.json({ status: "ok", db: "connected" });
   });
-});
+ });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

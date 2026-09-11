@@ -8,7 +8,7 @@ export const addInformation = (req, res) => {
         if (err) {
             return res.status(500).json({
                 message: "Failed to create",
-                error: err.message,   // Shows actual MySQL error
+                error: err.message,   
                 details: err
             });
         }
