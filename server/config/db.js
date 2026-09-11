@@ -30,7 +30,7 @@ db.connect((err)=>{
 //         console.log('the table is not created', res.message);
 //     }
 // });
-// const portfolio_table = `CREATE TABLE IS NOT EXIST portfolio (
+// const portfolio_table = `CREATE TABLE IF NOT EXISTS portfolio (
 //  id INT AUTO_INCREMENT PRIMARY KEY,
 //     image VARCHAR(255),
 //     discription TEXT,

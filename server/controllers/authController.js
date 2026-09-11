@@ -7,10 +7,14 @@ export const loginAdmin = async (req, res) => {
     const { email, password } = req.body;
 
     userFindbyEmail(email, async (err, results) => {
-        if (err) 
-         return res.status(500).json({ message: 'Database error' });
+       if (err) {
+         console.error("🔥 LOGIN DB ERROR:", err.message); 
+         return res
+           .status(500)
+           .json({ message: "Database error", realError: err.message });
+       }
 
-        if(results.length === 0) return res.status(401).json({mmessage:'invalid creadentials'});
+        if(results.length === 0) return res.status(401).json({message:'invalid creadentials'});
  const user = results[0];
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
@@ -58,17 +62,17 @@ export const createAdmin = async (req, res) => {
                 password: hashedPassword
             },
             (err, results) => {
-                if (err) {
-                    if (err.code === 'ER_DUP_ENTRY') {
-                        return res.status(409).json({
-                            message: 'Email already exists'
-                        });
-                    }
-
-                    return res.status(500).json({
-                        message: 'Database error'
-                    });
-                }
+               if (err) {
+                 console.error("🔥 REGISTER DB ERROR:", err.message);
+                 if (err.code === "ER_DUP_ENTRY") {
+                   return res
+                     .status(409)
+                     .json({ message: "Email already exists" });
+                 }
+                 return res
+                   .status(500)
+                   .json({ message: "Database error", realError: err.message });
+               }
 
                 return res.status(201).json({
                     message: 'User created successfully'
