@@ -1,80 +1,108 @@
-/* Topbar.module.css */
-
-/* Topbar container */
 .topbar {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  background: #ffffff;
-  padding: 0 2rem;
-  height: 70px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+  align-items: center;
+  background: white;
+  padding: 1rem 1.75rem;
   border-bottom: 1px solid #e2e8f0;
   position: sticky;
   top: 0;
   z-index: 10;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
 }
 
-/* Left side – page title / breadcrumbs */
-.topbar h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  background: linear-gradient(120deg, #1e293b, #334155);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  letter-spacing: -0.3px;
+.title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
   margin: 0;
+  letter-spacing: -0.3px;
 }
 
-/* Right side – user area (you can add later) */
-.userArea {
+.subtitle {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 0.15rem 0 0;
+}
+
+.right {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
-/* Notification icon (placeholder) */
-.notification {
-  position: relative;
-  cursor: pointer;
-  color: #64748b;
-  transition: color 0.2s;
-}
-.notification:hover {
-  color: #3b82f6;
-}
-
-/* Avatar / profile button */
-.avatar {
-  width: 40px;
-  height: 40px;
+.iconBtn {
+  background: #f1f5f9;
+  border: none;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  font-size: 1.1rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.iconBtn:hover {
+  background: #e2e8f0;
+  transform: scale(1.05);
+}
+
+.dot {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  background: #ef4444;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.35rem 0.75rem 0.35rem 0.35rem;
+  background: #f8fafc;
+  border-radius: 50px;
+  border: 1px solid #e2e8f0;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #ec4899);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.avatar:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  font-weight: 700;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .topbar {
-    padding: 0 1rem;
-    height: 60px;
-  }
-  .topbar h2 {
-    font-size: 1.2rem;
-  }
-  .avatar {
-    width: 36px;
-    height: 36px;
-  }
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+}
+
+.role {
+  font-size: 0.7rem;
+  color: #64748b;
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .profileInfo { display: none; }
+  .subtitle { display: none; }
+  .topbar { padding: 0.85rem 1rem; }
+  .title { font-size: 1.1rem; }
 }
