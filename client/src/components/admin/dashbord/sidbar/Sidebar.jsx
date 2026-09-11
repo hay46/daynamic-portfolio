@@ -3,19 +3,31 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../context/AuthContext";
 import styles from "./Sidebar.module.css";
 
-const Sidebar = () => {
+const Sidebar = ({ onClose }) => {
+  // ✅ accept onClose
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     if (window.confirm("Logout?")) {
       logout();
+      if (onClose) onClose(); // close sidebar on mobile
       navigate("/login");
     }
   };
 
+  // ✅ close sidebar after clicking a link on mobile
+  const handleLinkClick = () => {
+    if (onClose) onClose();
+  };
+
   return (
     <aside className={styles.sidebar}>
+      {/* Close button — only visible on mobile */}
+      <button className={styles.closeBtn} onClick={onClose} aria-label="Close">
+        ✕
+      </button>
+
       {/* Logo */}
       <div className={styles.logoBox}>
         <div className={styles.logoIcon}>P</div>
@@ -28,9 +40,11 @@ const Sidebar = () => {
       {/* Nav */}
       <nav className={styles.nav}>
         <p className={styles.navLabel}>MAIN</p>
+
         <NavLink
           to="/admin"
           end
+          onClick={handleLinkClick}
           className={({ isActive }) =>
             isActive ? `${styles.link} ${styles.active}` : styles.link
           }
@@ -41,6 +55,7 @@ const Sidebar = () => {
 
         <NavLink
           to="/admin/portfolio"
+          onClick={handleLinkClick}
           className={({ isActive }) =>
             isActive ? `${styles.link} ${styles.active}` : styles.link
           }
@@ -51,6 +66,7 @@ const Sidebar = () => {
 
         <NavLink
           to="/admin/messages"
+          onClick={handleLinkClick}
           className={({ isActive }) =>
             isActive ? `${styles.link} ${styles.active}` : styles.link
           }
@@ -61,6 +77,7 @@ const Sidebar = () => {
 
         <NavLink
           to="/admin/settings"
+          onClick={handleLinkClick}
           className={({ isActive }) =>
             isActive ? `${styles.link} ${styles.active}` : styles.link
           }
