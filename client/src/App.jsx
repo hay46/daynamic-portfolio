@@ -5,7 +5,6 @@ import About from './pages/publicPage/aboutPage/About';
 import Service from './pages/publicPage/servicePage/Service';
 import Portfolio from './pages/publicPage/portfolioPage/Portfolio';
 import Contact from './pages/publicPage/contactPage/Contact';  
-import login from './pages/publicPage/loginPage/Login'
 import Login from './pages/publicPage/loginPage/Login';
 import DashbordLayout from './components/Layouts/dashboardLayout/DashbordLayout.jsx';
 import Dashboard from './pages/adminPage/dashboardPage/Dashboard.jsx'
