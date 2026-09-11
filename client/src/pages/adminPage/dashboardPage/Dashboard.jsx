@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../../context/AuthContext";
-import { usePortfolio } from "../../context/PortfolioContext";
-import CreatePortfolioModal from "../../components/addPortfolio/CreatePortfolioModal";
-import EditPortfolioModal from "../../components/editPortfolio/EditPortfolioModal";
+import { useAuth } from "../../../context/AuthContext";
+import { usePortfolio } from "../../../context/PortfolioContext";
 import styles from "./Dashboard.module.css";
 
 const Dashboard = () => {
