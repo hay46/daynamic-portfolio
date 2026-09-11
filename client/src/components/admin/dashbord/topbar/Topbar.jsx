@@ -2,13 +2,23 @@ import React from "react";
 import { useAuth } from "../../../../context/AuthContext";
 import styles from "./Topbar.module.css";
 
-const Topbar = ({ title = "Dashboard" }) => {
+const Topbar = ({ onMenuClick }) => {
+  // ✅ accept onMenuClick
   const { user } = useAuth();
 
   return (
     <header className={styles.topbar}>
-      <div>
-        <h2 className={styles.title}>{title}</h2>
+      {/* ✅ Hamburger — mobile only */}
+      <button
+        className={styles.menuBtn}
+        onClick={onMenuClick}
+        aria-label="Open menu"
+      >
+        ☰
+      </button>
+
+      <div className={styles.titleGroup}>
+        <h2 className={styles.title}>Dashboard</h2>
         <p className={styles.subtitle}>Welcome back 👋</p>
       </div>
 
