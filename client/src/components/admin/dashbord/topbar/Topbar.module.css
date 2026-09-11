@@ -1,3 +1,26 @@
+/* Hamburger button */
+.menuBtn {
+  display: none;                /* hidden on desktop */
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #0f172a;
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  margin-right: 0.75rem;
+  transition: background 0.2s;
+}
+
+.menuBtn:hover {
+  background: #f1f5f9;
+}
+
+/* Group title + subtitle */
+.titleGroup {
+  flex: 1;
+  min-width: 0;
+}
 .topbar {
   display: flex;
   justify-content: space-between;
@@ -105,4 +128,12 @@
   .subtitle { display: none; }
   .topbar { padding: 0.85rem 1rem; }
   .title { font-size: 1.1rem; }
+}
+/* ---------- Mobile ---------- */
+@media (max-width: 768px) {
+  .menuBtn {
+    display: flex;              /* show on mobile */
+    align-items: center;
+    justify-content: center;
+  }
 }
