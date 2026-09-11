@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import Sidebar from "./Sidebar"; // ← adjust path to your Sidebar
-import Topbar from "./Topbar"; // ← adjust path to your Topbar
+import Sidebar from "../../admin/dashbord/sidbar/Sidebar"; // ← adjust path to your Sidebar
+import Topbar from "../../admin/dashbord/topbar/Topbar"; // ← adjust path to your Topbar
 import styles from "./DashbordLayout.module.css";
 
 const DashbordLayout = () => {
