@@ -169,11 +169,37 @@
   border-color: #ef4444;
 }
 
-/* ---------- Mobile ---------- */
+/* ---------- Close button (mobile only) ---------- */
+.closeBtn {
+  display: none;                /* hidden by default */
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ---------- Mobile adjustments ---------- */
 @media (max-width: 768px) {
   .sidebar {
-    position: fixed;
-    left: -280px;
-    transition: left 0.3s;
+    width: 280px;
+    height: 100vh;
+    position: relative;      /* wrapper handles fixed positioning */
+  }
+  .closeBtn {
+    display: flex;            /* show on mobile */
+    align-items: center;
+    justify-content: center;
   }
 }
