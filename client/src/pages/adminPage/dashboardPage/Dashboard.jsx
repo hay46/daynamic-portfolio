@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../../context/AuthContext';
-import { usePortfolio } from '../../../context/PortfolioContext';
-import { Link } from 'react-router-dom';
-import CreatePortfolioModal from '../addPortfolio/CreatePortfolioModal';
-import EditPortfolioModal from '../editPortfolio/EditPortfolioModal';
-import styles from './Dashboard.module.css';
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../../../context/AuthContext";
+import { usePortfolio } from "../../../context/PortfolioContext";
+import { Link } from "react-router-dom";
+import CreatePortfolioModal from "../addPortfolio/CreatePortfolioModal";
+import EditPortfolioModal from "../editPortfolio/EditPortfolioModal";
+import styles from "./Dashboard.module.css";
 
 const Dashboard = () => {
-  const { projects, fetchProjects, loading, deleteProject, updateProject } = usePortfolio();
+  // ✅ FIX #1: Actually call useAuth to get the user
+  const { user } = useAuth();
+
+  const { projects, fetchProjects, loading, deleteProject, updateProject } =
+    usePortfolio();
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [editingProject, setEditingProject] = useState(null);
 
@@ -16,7 +20,7 @@ const Dashboard = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    if (window.confirm('Are you sure you want to delete this project?')) {
+    if (window.confirm("Are you sure you want to delete this project?")) {
       await deleteProject(id);
     }
   };
@@ -30,8 +34,12 @@ const Dashboard = () => {
   return (
     <div className={styles.dashboard}>
       <div className={styles.header}>
-        <h1>Dashboard</h1>
-        <button 
+        <div>
+          {/* ✅ FIX #2: Welcome message OUTSIDE the button */}
+          <h1>Welcome, {user?.name || "User"}</h1>
+          <p>Manage your portfolio projects</p>
+        </div>
+        <button
           className={styles.createBtn}
           onClick={() => setShowCreateModal(true)}
         >
@@ -52,7 +60,9 @@ const Dashboard = () => {
           <div className={styles.statIcon}>✅</div>
           <div className={styles.statInfo}>
             <h3>Published</h3>
-            <p className={styles.statNumber}>{projects.filter(p => p.status !== 'draft').length}</p>
+            <p className={styles.statNumber}>
+              {projects.filter((p) => p.status !== "draft").length}
+            </p>
           </div>
         </div>
         <div className={styles.statCard}>
@@ -84,26 +94,63 @@ const Dashboard = () => {
             {projects.length === 0 ? (
               <div className={styles.emptyState}>
                 <p>No projects yet.</p>
-                <button onClick={() => setShowCreateModal(true)} className={styles.addButton}>
+                <button
+                  onClick={() => setShowCreateModal(true)}
+                  className={styles.addButton}
+                >
                   + Create Your First Project
                 </button>
               </div>
             ) : (
               projects.map((project) => (
-                <div key={project.id} className={styles.projectCard}>
+                // ✅ FIX #3: Use fallback key so you never get "undefined" key warning
+                <div
+                  key={project.id || project._id || project.title}
+                  className={styles.projectCard}
+                >
                   {project.image && (
-                    <img src={project.image} alt={project.title} className={styles.projectImage} />
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className={styles.projectImage}
+                    />
                   )}
                   <div className={styles.projectInfo}>
                     <h3>{project.title}</h3>
                     <p>{project.description?.substring(0, 80)}...</p>
                     <div className={styles.projectLinks}>
-                      <a href={project.github_link} target="_blank" rel="noopener noreferrer">GitHub</a>
-                      <a href={project.live_link} target="_blank" rel="noopener noreferrer">Live Demo</a>
+                      {project.github_link && (
+                        <a
+                          href={project.github_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          GitHub
+                        </a>
+                      )}
+                      {project.live_link && (
+                        <a
+                          href={project.live_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Live Demo
+                        </a>
+                      )}
                     </div>
                     <div className={styles.cardActions}>
-                      <button onClick={() => handleEdit(project)} className={styles.editBtn}>Edit</button>
-                      <button onClick={() => handleDelete(project.id)} className={styles.deleteBtn}>Delete</button>
+                      <button
+                        onClick={() => handleEdit(project)}
+                        className={styles.editBtn}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(project.id)}
+                        className={styles.deleteBtn}
+                      >
+                        Delete
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -118,9 +165,9 @@ const Dashboard = () => {
         <CreatePortfolioModal onClose={() => setShowCreateModal(false)} />
       )}
       {editingProject && (
-        <EditPortfolioModal 
-          project={editingProject} 
-          onClose={() => setEditingProject(null)} 
+        <EditPortfolioModal
+          project={editingProject}
+          onClose={() => setEditingProject(null)}
         />
       )}
     </div>
