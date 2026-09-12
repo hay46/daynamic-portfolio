@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import db from '../config/db.js'
 import { userFindbyEmail,userInsertData} from '../models/userModel.js';
 
 export const loginAdmin = async (req, res) => {

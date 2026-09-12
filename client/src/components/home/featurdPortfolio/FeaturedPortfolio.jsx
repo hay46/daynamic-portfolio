@@ -1,14 +1,19 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { usePortfolio } from '../../../context/PortfolioContext';
-import styles from './FeaturdPortfolio.module.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import { usePortfolio } from "../../../context/PortfolioContext";
+import styles from "./FeaturdPortfolio.module.css";
 
 const FeaturedPortfolio = () => {
-  const { projects, loading } = usePortfolio();
-  const featured = projects.slice(0, 3); 
+  // 1. Add a default empty array fallback just in case context returns undefined
+  const { projects = [], loading } = usePortfolio();
+
+  // 2. Safely check if projects is an array before slicing
+  const featured = Array.isArray(projects) ? projects.slice(0, 3) : [];
 
   if (loading) return <div className={styles.loading}>Loading projects...</div>;
-  if (projects.length === 0) return null;
+
+  // 3. Prevent rendering if there are no projects to show
+  if (featured.length === 0) return null;
 
   return (
     <section className={styles.featured}>
@@ -19,11 +24,16 @@ const FeaturedPortfolio = () => {
           {featured.map((project) => (
             <div key={project.id} className={styles.card}>
               {project.image && (
-                <img src={project.image} alt={project.title} className={styles.image} />
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className={styles.image}
+                />
               )}
               <div className={styles.content}>
                 <h3>{project.title}</h3>
-                <p>{project.discription?.substring(0, 100)}...</p>
+                {/* Fixed typo: discription -> description */}
+                <p>{project.description?.substring(0, 100)}...</p>
                 <Link to={`/portfolio/${project.id}`} className={styles.btn}>
                   View Project →
                 </Link>
@@ -32,7 +42,9 @@ const FeaturedPortfolio = () => {
           ))}
         </div>
         <div className={styles.seeAll}>
-          <Link to="/portfolio" className={styles.seeAllBtn}>See All Projects →</Link>
+          <Link to="/portfolio" className={styles.seeAllBtn}>
+            See All Projects →
+          </Link>
         </div>
       </div>
     </section>
