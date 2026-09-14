@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styles from './Herosection.module.css';
+import styles from './HeroSection.module.css';
 
 const HeroSection = ({
   badge = "Welcome to VISION",
