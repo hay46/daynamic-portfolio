@@ -9,7 +9,7 @@ import Login from "./pages/publicPage/loginPage/Login";
 import DashbordLayout from "./components/Layouts/dashboardLayout/DashbordLayout.jsx";
 import Dashboard from "./pages/adminPage/dashboardPage/Dashboard.jsx";
 import ProtectedRoutes from "./routes/ProtectedRoutes.jsx";
-
+import ScrollToTop from "./components/ScrollToTop.jsx";
 // ✅ Placeholder pages — create real ones later
 const PortfolioAdmin = () => (
   <div style={{ padding: "2rem" }}>
@@ -33,6 +33,7 @@ const SettingsAdmin = () => (
 const App = () => {
   return (
     <BrowserRouter>
+    <ScrollToTop />
       <Routes>
         {/* ---------- PUBLIC ---------- */}
         <Route element={<PublicLayout />}>
