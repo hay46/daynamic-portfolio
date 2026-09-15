@@ -9,8 +9,9 @@ import Login from "./pages/publicPage/loginPage/Login";
 import DashbordLayout from "./components/Layouts/dashboardLayout/DashbordLayout.jsx";
 import Dashboard from "./pages/adminPage/dashboardPage/Dashboard.jsx";
 import ProtectedRoutes from "./routes/ProtectedRoutes.jsx";
-import ScrollToTop from "./components/ScrollToTop.jsx";
-// ✅ Placeholder pages — create real ones later
+import ScrollToTop from "./components/ScrollToTop.jsx"; // ← new
+
+// Placeholder pages
 const PortfolioAdmin = () => (
   <div style={{ padding: "2rem" }}>
     <h1>Manage Portfolio</h1>
@@ -33,7 +34,7 @@ const SettingsAdmin = () => (
 const App = () => {
   return (
     <BrowserRouter>
-    <ScrollToTop />
+      <ScrollToTop /> {/* ← new: scrolls to top on route change */}
       <Routes>
         {/* ---------- PUBLIC ---------- */}
         <Route element={<PublicLayout />}>
@@ -54,14 +55,13 @@ const App = () => {
             </ProtectedRoutes>
           }
         >
-          <Route index element={<Dashboard />} /> {/* /admin */}
-          <Route path="portfolio" element={<PortfolioAdmin />} />{" "}
-          {/* /admin/portfolio */}
-          <Route path="messages" element={<MessagesAdmin />} />{" "}
-          {/* /admin/messages */}
-          <Route path="settings" element={<SettingsAdmin />} />{" "}
-          {/* /admin/settings */}
+          <Route index element={<Dashboard />} />
+          <Route path="portfolio" element={<PortfolioAdmin />} />
+          <Route path="messages" element={<MessagesAdmin />} />
+          <Route path="settings" element={<SettingsAdmin />} />
         </Route>
+
+        {/* ---------- 404 ---------- */}
         <Route
           path="*"
           element={
