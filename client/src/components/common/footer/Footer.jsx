@@ -122,7 +122,7 @@ const Footer = () => {
                   href="mailto:haymanotebabu@gmail.com"
                   className={styles.contactLink}
                 >
-                  haymanotebabu@gmail.com
+                  haymanotebabu2@gmail.com
                 </a>
               </li>
             </ul>
