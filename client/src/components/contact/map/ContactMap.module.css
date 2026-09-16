@@ -1,6 +1,102 @@
-.map {
-  border-radius: 1rem;
+/* ============================================================
+   CONTACT MAP — Glassmorphic framed map
+   ============================================================ */
+
+.mapSection {
+  margin: 2rem 0;
+}
+
+.header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 2rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.28);
+  color: #6ee7b7;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.eyebrowDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* Map */
+.mapWrapper {
+  position: relative;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  margin-top: 1.5rem;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  background: rgba(20, 20, 32, 0.5);
+  padding: 8px;
+  box-shadow: 0 30px 60px -25px rgba(0, 0, 0, 0.75);
+}
+
+.mapGlow {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(
+    circle at center,
+    rgba(99, 102, 241, 0.15) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(60px);
+}
+
+.mapFrame {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 360px;
+  border: 0;
+  border-radius: 14px;
+  filter: grayscale(0.4) contrast(1.05) brightness(0.9);
+  transition: filter 0.35s ease;
+}
+
+.mapWrapper:hover .mapFrame {
+  filter: grayscale(0) contrast(1) brightness(1);
+}
+
+@media (max-width: 640px) {
+  .mapFrame {
+    height: 260px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mapFrame { transition: none; }
 }
