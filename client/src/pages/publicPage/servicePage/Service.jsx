@@ -4,7 +4,7 @@ import ProcessSection from "../../../components/services/processSection/ProcessS
 import FaqSection from "../../../components/services/faqsection/FaqSection";
 import HeroSection from "../../../components/common/hero/HeroSection";
 import serviceHeroImage from "../../../assets/images/service-hero.png";
-import styles from "./Services.module.css";
+import styles from "./Service.module.css";
 
 const ServicesPage = () => {
   return (
