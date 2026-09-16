@@ -9,21 +9,19 @@ import homeHeroImage from '../../../assets/images/portfolioHero.jpg'
 const Home = () => {
   return (
     <>
-    
-       <HeroSection
-        badge="Welcome to My Portfolio"
+      <HeroSection
+        badge="Welcome to VISION"
         title="I am Haymanot"
-        gradientText="Creative Developer"
-        subtitle="Building modern web applications with passion and precision. Let's bring your ideas to life."
+        gradientText="Digital Dreams"
+        subtitle="Transforming ideas into stunning digital experiences."
         imageSrc={homeHeroImage}
-        imageAlt="Haymanot - Home"
+        imageAlt="Haymanot"
       />
-      <ServicesPreview/>
-      <FeaturedPortfolio/>
-       <AboutPreview/>
-       <SkillsSection/>
-       <CallToAction/>
-       
+      <ServicesPreview />
+      <FeaturedPortfolio />
+      <AboutPreview />
+      <SkillsSection />
+      <CallToAction />
     </>
   );
 };
