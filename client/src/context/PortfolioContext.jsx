@@ -15,40 +15,36 @@ export const usePortfolio = () => {
 
 // --- Helpers ---
 
-// Always return an array, no matter what the backend sends
 const normalizeList = (data) => {
   if (Array.isArray(data)) return data;
   return data?.results || data?.projects || data?.data || [];
 };
 
-// Always return a single project object
 const normalizeOne = (data) => {
   if (!data) return null;
   return data.results || data.project || data.data || data;
 };
 
-// Map frontend shape → backend shape (handles the 'discription' typo)
 const toBackendPayload = (formData) => ({
   title: formData.title,
   discription: formData.description, // frontend "description" → backend "discription"
   image: formData.image,
   github_link: formData.github_link,
   live_link: formData.live_link,
-  technology: formData.technology, // was missing before
+  technology: formData.technology,
 });
 
-// Map backend shape → frontend shape (so local state stays consistent)
+// ✅ THE FIX: handle id, Id, and _id
 const toFrontendProject = (raw) => ({
-  id: raw.id,
+  id: raw.id ?? raw.Id ?? raw._id,
   title: raw.title,
-  description: raw.description ?? raw.discription, // read whichever exists
+  description: raw.description ?? raw.discription,
   image: raw.image,
   github_link: raw.github_link,
   live_link: raw.live_link,
   technology: raw.technology,
 });
 
-// Central error handler — detects 401 and forces logout
 const handleError = (error, fallbackMessage) => {
   console.error(fallbackMessage, error);
 
@@ -71,7 +67,6 @@ export const PortfolioProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const { token } = useAuth();
 
-  // Fetch all projects (public)
   const fetchProjects = async () => {
     try {
       setLoading(true);
@@ -80,24 +75,21 @@ export const PortfolioProvider = ({ children }) => {
       setProjects(list);
       return { success: true };
     } catch (error) {
-      setProjects([]); // never leave state in a broken shape
+      setProjects([]);
       return handleError(error, "Failed to fetch projects");
     } finally {
       setLoading(false);
     }
   };
 
-  // Fetch once on mount
   useEffect(() => {
     fetchProjects();
   }, []);
 
-  // Clear projects when the user logs out
   useEffect(() => {
     if (!token) setProjects([]);
   }, [token]);
 
-  // Add project (protected)
   const addProject = async (projectData) => {
     try {
       setLoading(true);
@@ -111,7 +103,6 @@ export const PortfolioProvider = ({ children }) => {
       if (created && created.id) {
         setProjects((prev) => [...prev, created]);
       } else {
-        // Fallback: refresh from server if shape is unexpected
         await fetchProjects();
       }
       return { success: true };
@@ -122,7 +113,6 @@ export const PortfolioProvider = ({ children }) => {
     }
   };
 
-  // Update project (protected)
   const updateProject = async (id, projectData) => {
     try {
       setLoading(true);
@@ -132,10 +122,12 @@ export const PortfolioProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      // Update local state using the SAME shape as everywhere else
+      // ✅ String-safe comparison
       setProjects((prev) =>
         prev.map((p) =>
-          p.id === id ? { ...p, ...toFrontendProject({ ...payload, id }) } : p,
+          String(p.id) === String(id)
+            ? { ...p, ...toFrontendProject({ ...payload, id }) }
+            : p,
         ),
       );
       return { success: true };
@@ -146,14 +138,14 @@ export const PortfolioProvider = ({ children }) => {
     }
   };
 
-  // Delete project (protected)
   const deleteProject = async (id) => {
     try {
       setLoading(true);
       await api.delete(`/portfolio/delete_portfolio/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setProjects((prev) => prev.filter((p) => p.id !== id));
+      // ✅ String-safe filter
+      setProjects((prev) => prev.filter((p) => String(p.id) !== String(id)));
       return { success: true };
     } catch (error) {
       return handleError(error, "Failed to delete project");

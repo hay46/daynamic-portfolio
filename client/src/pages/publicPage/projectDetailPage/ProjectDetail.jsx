@@ -4,7 +4,7 @@ import { usePortfolio } from "../../../context/PortfolioContext";
 import styles from "./ProjectDetail.module.css";
 
 const ProjectDetail = () => {
-  const { id } = useParams(); // from the URL: /portfolio/:id
+  const { id } = useParams();
   const navigate = useNavigate();
   const { projects = [], loading } = usePortfolio();
 
@@ -30,7 +30,7 @@ const ProjectDetail = () => {
     }
   }, [id, projects, loading]);
 
-  // ---------- Loading state ----------
+  // ---------- Loading ----------
   if (loading) {
     return (
       <section className={styles.detail}>
@@ -161,24 +161,8 @@ const ProjectDetail = () => {
                 className={styles.btnPrimary}
               >
                 View Live Demo
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                  <polyline points="15 3 21 3 21 9" />
-                  <line x1="10" y1="14" x2="21" y2="3" />
-                </svg>
               </a>
             )}
-
             {project.github_link && (
               <a
                 href={project.github_link}
@@ -187,15 +171,6 @@ const ProjectDetail = () => {
                 className={styles.btnSecondary}
               >
                 View Source Code
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M12 .5C5.73.5.5 5.73.5 12a11.5 11.5 0 0 0 7.86 10.93c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.54-3.88-1.54-.53-1.35-1.3-1.71-1.3-1.71-1.06-.72.08-.7.08-.7 1.17.08 1.79 1.2 1.79 1.2 1.04 1.79 2.74 1.27 3.4.97.1-.76.41-1.27.74-1.56-2.55-.29-5.23-1.27-5.23-5.66 0-1.25.44-2.27 1.17-3.07-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.17a10.9 10.9 0 0 1 5.74 0c2.18-1.48 3.14-1.17 3.14-1.17.62 1.59.23 2.76.11 3.05.73.8 1.17 1.82 1.17 3.07 0 4.4-2.69 5.37-5.25 5.65.42.36.79 1.07.79 2.17v3.22c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z" />
-                </svg>
               </a>
             )}
           </div>
@@ -204,21 +179,7 @@ const ProjectDetail = () => {
         {/* Back */}
         <div className={styles.backRow}>
           <Link to="/portfolio" className={styles.backLink}>
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <line x1="19" y1="12" x2="5" y2="12" />
-              <polyline points="12 19 5 12 12 5" />
-            </svg>
-            Back to all projects
+            ← Back to all projects
           </Link>
         </div>
       </div>
