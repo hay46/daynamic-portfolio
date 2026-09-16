@@ -4,12 +4,13 @@ import Home from "./pages/publicPage/homePage/Home";
 import About from "./pages/publicPage/aboutPage/About";
 import Service from "./pages/publicPage/servicePage/Service";
 import Portfolio from "./pages/publicPage/portfolioPage/Portfolio";
+import ProjectDetail from "./pages/publicPage/projectDetailPage/ProjectDetail"; // ← NEW
 import Contact from "./pages/publicPage/contactPage/Contact";
 import Login from "./pages/publicPage/loginPage/Login";
 import DashbordLayout from "./components/Layouts/dashboardLayout/DashbordLayout.jsx";
 import Dashboard from "./pages/adminPage/dashboardPage/Dashboard.jsx";
 import ProtectedRoutes from "./routes/ProtectedRoutes.jsx";
-import ScrollToTop from "./components/ScrollToTop.jsx"; // ← new
+import ScrollToTop from "./components/ScrollToTop.jsx";
 
 // Placeholder pages
 const PortfolioAdmin = () => (
@@ -34,7 +35,7 @@ const SettingsAdmin = () => (
 const App = () => {
   return (
     <BrowserRouter>
-      <ScrollToTop /> {/* ← new: scrolls to top on route change */}
+      <ScrollToTop />
       <Routes>
         {/* ---------- PUBLIC ---------- */}
         <Route element={<PublicLayout />}>
@@ -42,6 +43,8 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/service" element={<Service />} />
           <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/portfolio/:id" element={<ProjectDetail />} />{" "}
+          {/* ← NEW */}
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
         </Route>
