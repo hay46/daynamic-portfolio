@@ -1,0 +1,93 @@
+/* ============================================================
+   SERVICES PAGE — Page wrapper + sticky nav
+   ============================================================ */
+
+.servicesPage {
+  position: relative;
+  background: #07070d;
+  color: #f1f5f9;
+  overflow-x: hidden;
+}
+
+/* ---------- Sticky section nav ---------- */
+
+.sectionNav {
+  position: sticky;
+  top: 72px;
+  z-index: 50;
+  padding: 0 2rem;
+  background: rgba(7, 7, 13, 0.85);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+.sectionNavInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.sectionNavInner::-webkit-scrollbar {
+  display: none;
+}
+
+.sectionNavLink {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #94a3b8;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.sectionNavLink:hover {
+  color: #e2e8f0;
+  background: rgba(148, 163, 184, 0.08);
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+.sections {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 900px) {
+  .sectionNav {
+    top: 60px;
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .sectionNavInner {
+    gap: 0.35rem;
+    padding: 0.6rem 0;
+  }
+
+  .sectionNavLink {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sectionNav,
+  .sectionNavLink {
+    transition: none;
+  }
+}

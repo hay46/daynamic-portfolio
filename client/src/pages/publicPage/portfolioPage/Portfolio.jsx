@@ -1,28 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import PortfolioFilter from '../../../components/portfilo/portfolioFilter/PortfolioFilter';
-import PortfolioGrid from '../../../components/portfilo/portfolioGrid/PortfolioGrid';
-import { usePortfolio } from '../../../context/PortfolioContext';
-import HeroSection from '../../../components/common/hero/HeroSection';
-import portfolioHeroImage from '../../../assets/images/portfolio-hero.png'
-import styles from './Portfolio.module.css'
+import { useEffect, useState } from "react";
+import PortfolioFilter from "../../../components/portfilo/portfolioFilter/PortfolioFilter";
+import PortfolioGrid from "../../../components/portfilo/portfolioGrid/PortfolioGrid";
+import { usePortfolio } from "../../../context/PortfolioContext";
+import HeroSection from "../../../components/common/hero/HeroSection";
+import portfolioHeroImage from "../../../assets/images/portfolio-hero.png";
+import styles from "./Portfolio.module.css";
 
 const PortfolioPage = () => {
   const { projects, loading, fetchProjects } = usePortfolio();
   const [filteredProjects, setFilteredProjects] = useState([]);
-  const [activeCategory, setActiveCategory] = useState('All');
+  const [activeCategory, setActiveCategory] = useState("All");
 
   useEffect(() => {
-    fetchProjects(); 
+    fetchProjects();
   }, []);
 
   useEffect(() => {
-    if (!projects.length) return;
+    if (!Array.isArray(projects)) {
+      setFilteredProjects([]);
+      return;
+    }
 
-    if (activeCategory === 'All') {
+    if (activeCategory === "All") {
       setFilteredProjects(projects);
     } else {
       setFilteredProjects(
-        projects.filter((project) => project.category === activeCategory)
+        projects.filter(
+          (project) =>
+            (project.category || "").toLowerCase() ===
+            activeCategory.toLowerCase(),
+        ),
       );
     }
   }, [projects, activeCategory]);
@@ -32,13 +39,13 @@ const PortfolioPage = () => {
   };
 
   return (
-
-    <div className="portfolio-page">
+    <main className={styles.portfolioPage}>
+      {/* ---------- HERO ---------- */}
       <HeroSection
         badge="My Work"
         title="Explore My"
         gradientText="Projects"
-        subtitle="A collection of my best work – from web apps to UI designs."
+        subtitle="A collection of my best work — from web apps to UI designs."
         btnPrimaryText="View All Projects"
         btnPrimaryLink="#projects"
         btnSecondaryText="Hire Me"
@@ -46,12 +53,40 @@ const PortfolioPage = () => {
         imageSrc={portfolioHeroImage}
         imageAlt="Portfolio showcase"
       />
-      <PortfolioFilter
-        activeCategory={activeCategory}
-        onFilterChange={handleFilterChange}
-      />
-      <PortfolioGrid projects={filteredProjects} loading={loading} />
-    </div>
+
+      {/* ---------- FILTER + GRID ---------- */}
+      <section className={styles.projectsSection} id="projects">
+        <div className={styles.glow1} aria-hidden="true" />
+        <div className={styles.glow2} aria-hidden="true" />
+
+        <div className={styles.container}>
+          {/* Header */}
+          <header className={styles.header}>
+            <span className={styles.eyebrow}>
+              <span className={styles.eyebrowDot} />
+              Portfolio
+            </span>
+            <h2 className={styles.title}>
+              All <span className={styles.gradient}>Projects</span>
+            </h2>
+            <p className={styles.subtitle}>
+              Browse my work by category or view everything at once.
+            </p>
+          </header>
+
+          {/* Filter */}
+          <PortfolioFilter
+            activeCategory={activeCategory}
+            onFilterChange={handleFilterChange}
+            totalCount={projects?.length || 0}
+            filteredCount={filteredProjects.length}
+          />
+
+          {/* Grid */}
+          <PortfolioGrid projects={filteredProjects} loading={loading} />
+        </div>
+      </section>
+    </main>
   );
 };
 
