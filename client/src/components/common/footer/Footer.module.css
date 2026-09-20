@@ -416,7 +416,7 @@
   .grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
-    padding-bottom: 2.5rem;
+    padding-bottom: 2.6rem;
   }
 
   .description {
