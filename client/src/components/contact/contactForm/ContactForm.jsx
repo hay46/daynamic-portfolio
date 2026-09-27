@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./ContactForm.module.css";
+import styles from "./Contactform.module.css";
 
 const initialForm = { name: "", email: "", subject: "", message: "" };
 
