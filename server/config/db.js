@@ -1,4 +1,9 @@
-import mysql from "mysql2/promise"; // Make sure it's /promise
+import mysql from "mysql2/promise";
+
+// Check if we are connecting to a remote database (Railway) or local (localhost)
+const isRemoteDatabase =
+  process.env.MYSQL_HOST !== "localhost" &&
+  process.env.MYSQL_HOST !== "127.0.0.1";
 
 const db = mysql.createPool({
   host: process.env.MYSQL_HOST,
@@ -6,10 +11,10 @@ const db = mysql.createPool({
   password: process.env.MYSQL_PASSWORD,
   database: process.env.MYSQL_DATABASE,
   port: process.env.MYSQL_PORT || 3306,
-  ssl: { rejectUnauthorized: false }, // Required for Railway
+  // Only use SSL if we are connecting to a remote database like Railway
+  ssl: isRemoteDatabase ? { rejectUnauthorized: false } : null,
 });
 
-// THIS is the function your server.js is waiting for
 export const initializeDatabase = async () => {
   try {
     await db.query(`
@@ -36,7 +41,7 @@ export const initializeDatabase = async () => {
     console.log("✅ Portfolio table is ready.");
   } catch (err) {
     console.error("❌ Error creating tables:", err.message);
-    throw err; // Stop the server if tables fail
+    throw err;
   }
 };
 
