@@ -1,19 +1,25 @@
 import mysql from "mysql2/promise";
 
-// Check if we are connecting to a remote database (Railway) or local (localhost)
 const isRemoteDatabase =
   process.env.MYSQL_HOST !== "localhost" &&
   process.env.MYSQL_HOST !== "127.0.0.1";
 
-const db = mysql.createPool({
+// Build the connection options object
+const connectionOptions = {
   host: process.env.MYSQL_HOST,
   user: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWORD,
   database: process.env.MYSQL_DATABASE,
   port: process.env.MYSQL_PORT || 3306,
-  // Only use SSL if we are connecting to a remote database like Railway
-  ssl: isRemoteDatabase ? { rejectUnauthorized: false } : null,
-});
+};
+
+// ONLY add SSL if we are connecting to a remote database like Railway
+if (isRemoteDatabase) {
+  connectionOptions.ssl = { rejectUnauthorized: false };
+}
+
+// Create the pool with the final options
+const db = mysql.createPool(connectionOptions);
 
 export const initializeDatabase = async () => {
   try {
